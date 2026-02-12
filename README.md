@@ -1,3 +1,57 @@
+# Drupal Excel Importer (Capitolato Mini)
+
+Modulo personalizzato per Drupal 10/11 che permette l'importazione di dati da file Excel (.xlsx) direttamente in una tabella personalizzata del database PostgreSQL/MySQL.
+
+## Caratteristiche
+- Form di caricamento file protetto da permessi amministrativi.
+- Validazione estensione file (`.xlsx`).
+- Integrazione con la libreria **PhpSpreadsheet**.
+- Creazione automatica di una tabella dedicata (`dati_importati`) all'installazione del modulo.
+
+## Requisiti
+- Drupal 10 o superiore.
+- PHP 8.1 o superiore.
+- Libreria `phpoffice/phpspreadsheet`.
+
+## Installazione via DDEV/Composer
+
+1. **Scarica le dipendenze:**
+   Assicurati di avere la libreria necessaria installata nel tuo ambiente:
+   ```bash
+   ddev composer require phpoffice/phpspreadsheet
+
+2. Abilita il modulo:
+
+ddev drush en excel_importer -y
+
+3. Pulisci la cache:
+
+ddev drush cr
+
+Utilizzo
+Una volta installato, il form di importazione sarà disponibile al seguente percorso: http://tuo-sito.ddev.site/admin/config/content/import-excel
+
+Il file Excel deve avere la seguente struttura:
+
+Colonna A: Nome
+
+Colonna B: Email
+
+Database
+Il modulo crea una tabella chiamata dati_importati con i seguenti campi:
+
+id: Serial (Primary Key)
+
+nome: Varchar
+
+email: Varchar
+
+Note sulle performance
+Il modulo utilizza setReadDataOnly(true) per ottimizzare l'uso della memoria RAM durante il caricamento di file di grandi dimensioni.
+
+
+## originale drupal:
+
 <img alt="Drupal Logo" src="https://www.drupal.org/files/Wordmark_blue_RGB.png" height="60px">
 
 Drupal is an open source content management platform supporting a variety of
