@@ -112,7 +112,7 @@ use Drupal\Core\Database\Database;
     $spreadsheet = IOFactory::load($path);
     /*
     per alleggerire il caricamento del file Excel, puoi utilizzare le seguenti opzioni con PhpSpreadsheet:
-    
+
 $reader = IOFactory::createReader('Xlsx');
 
 // 1. Carica solo i dati, ignora stili, bordi, colori e formattazione (RISPARMIO RAM ENORME)
@@ -126,6 +126,9 @@ $spreadsheet = $reader->load($physical_path);
     $data = $spreadsheet->getActiveSheet()->toArray();
 
     $connection = Database::getConnection();
+    // Svuota completamente la tabella prima di inserire i nuovi dati
+    $connection->truncate('dati_importati')->execute();
+
     // Saltiamo la prima riga se contiene le intestazioni
     foreach (array_slice($data, 1) as $row) {
       $connection->insert('dati_importati')
