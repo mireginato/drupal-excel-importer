@@ -1,0 +1,7 @@
+import_excel_capitolato_mini.excel_form_mini:
+  path: '/admin/config/content/import_excel_capitolato_mini'
+  defaults:
+    _title: 'Excel Form Mini'
+    _form: '\Drupal\import_excel_capitolato_mini\Form\ExcelFormMini'
+  requirements:
+    _permission: 'access content'
